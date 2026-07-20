@@ -1,42 +1,331 @@
 @extends('layouts.prospecteur')
 
+@section('page-title', 'Nouveau prospect')
+@section('user-info', 'Prospecteur')
+
 @section('content')
-    <h3 class="mb-4">Nouveau Prospect</h3>
+    <style>
+        .form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 35px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #eef0f5;
+            max-width: 650px;
+        }
 
-    <form method="POST" action="{{ route('prospecteur.prospects.store') }}" class="bg-white p-4 rounded shadow-sm" style="max-width: 500px;">
-        @csrf
+        .form-container .form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f2f6;
+        }
 
-        <div class="mb-3">
-            <label class="form-label">Projet</label>
-            <select name="project_id" class="form-control" required>
-                <option value="">-- Choisir un projet --</option>
-                @foreach ($projects as $project)
-                    <option value="{{ $project->id }}">{{ $project->name }}</option>
-                @endforeach
-            </select>
+        .form-container .form-header h3 {
+            margin: 0;
+            font-weight: 700;
+            color: #0d1f3c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-container .form-header h3 i {
+            color: #ffd700;
+        }
+
+        .form-container .form-header .step-badge {
+            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .form-container .form-header .step-badge i {
+            color: #ffd700;
+        }
+
+        .form-container .form-label {
+            font-weight: 600;
+            color: #0d1f3c;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-container .form-label i {
+            color: #ffd700;
+            width: 18px;
+        }
+
+        .form-container .form-label .required {
+            color: #dc3545;
+            font-weight: 700;
+        }
+
+        .form-container .form-control {
+            border-radius: 10px;
+            border: 2px solid #e0e7f0;
+            padding: 10px 16px;
+            transition: all 0.2s ease;
+        }
+
+        .form-container .form-control:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+        }
+
+        .form-container .form-control::placeholder {
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        .form-container select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c757d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .form-container textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-container .btn-group-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f2f6;
+            flex-wrap: wrap;
+        }
+
+        .form-container .btn-group-actions .btn-submit {
+            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-container .btn-group-actions .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 31, 60, 0.3);
+        }
+
+        .form-container .btn-group-actions .btn-submit i {
+            color: #ffd700;
+        }
+
+        .form-container .btn-group-actions .btn-cancel {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #e0e7f0;
+            border-radius: 10px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .form-container .btn-group-actions .btn-cancel:hover {
+            background: #e9ecef;
+            border-color: #ced4da;
+            color: #495057;
+            text-decoration: none;
+        }
+
+        .form-container .btn-group-actions .btn-cancel i {
+            color: #6c757d;
+        }
+
+        .form-container .is-invalid {
+            border-color: #dc3545;
+        }
+
+        .form-container .is-invalid:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+        }
+
+        .form-container .invalid-feedback {
+            font-size: 0.8rem;
+            color: #dc3545;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 4px;
+        }
+
+        .form-container .invalid-feedback i {
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .form-container .form-header {
+                flex-wrap: wrap;
+            }
+
+            .form-container .form-header .step-badge {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-container .form-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .form-container .btn-group-actions {
+                flex-direction: column;
+            }
+
+            .form-container .btn-group-actions .btn-submit,
+            .form-container .btn-group-actions .btn-cancel {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .form-container .form-control {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-container .form-header h3 {
+                font-size: 1rem;
+            }
+
+            .form-container .form-label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h3>
+                <i class="fas fa-user-plus"></i>
+                Nouveau Prospect
+            </h3>
+            <span class="step-badge">
+                <i class="fas fa-pen"></i> Formulaire
+            </span>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Nom du prospect</label>
-            <input type="text" name="name" class="form-control" required>
-        </div>
+        <form method="POST" action="{{ route('prospecteur.prospects.store') }}">
+            @csrf
 
-        <div class="mb-3">
-            <label class="form-label">Téléphone</label>
-            <input type="text" name="phone" class="form-control">
-        </div>
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="fas fa-project-diagram"></i>
+                    Projet
+                    <span class="required">*</span>
+                </label>
+                <select name="project_id" class="form-control @error('project_id') is-invalid @enderror" required>
+                    <option value="">-- Choisir un projet --</option>
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? 'selected' : '' }}>
+                            {{ $project->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('project_id')
+                    <div class="invalid-feedback">
+                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control">
-        </div>
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="fas fa-user"></i>
+                    Nom du prospect
+                    <span class="required">*</span>
+                </label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Jean Dupont" value="{{ old('name') }}" required>
+                @error('name')
+                    <div class="invalid-feedback">
+                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Notes</label>
-            <textarea name="notes" class="form-control" rows="3"></textarea>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="fas fa-phone"></i>
+                    Téléphone
+                </label>
+                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="06 12 34 56 78" value="{{ old('phone') }}">
+                @error('phone')
+                    <div class="invalid-feedback">
+                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-        <button class="btn btn-primary">Enregistrer</button>
-        <a href="{{ route('prospecteur.prospects.index') }}" class="btn btn-outline-secondary">Annuler</a>
-    </form>
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </label>
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="jean.dupont@email.com" value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">
+                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="fas fa-sticky-note"></i>
+                    Notes
+                </label>
+                <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" rows="3" placeholder="Informations complémentaires...">{{ old('notes') }}</textarea>
+                @error('notes')
+                    <div class="invalid-feedback">
+                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="btn-group-actions">
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <a href="{{ route('prospecteur.prospects.index') }}" class="btn-cancel">
+                    <i class="fas fa-times"></i> Annuler
+                </a>
+            </div>
+        </form>
+    </div>
 @endsection
