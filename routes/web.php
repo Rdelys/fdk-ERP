@@ -28,5 +28,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('projects', \App\Http\Controllers\Admin\ProjectController::class);
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
+        // Finance
+        Route::get('/finance', [\App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('finance.index');
+        Route::post('/finance/transaction', [\App\Http\Controllers\Admin\FinanceController::class, 'storeTransaction'])->name('finance.transaction.store');
+        Route::delete('/finance/transaction/{transaction}', [\App\Http\Controllers\Admin\FinanceController::class, 'destroyTransaction'])->name('finance.transaction.destroy');
+        Route::post('/finance/objectifs', [\App\Http\Controllers\Admin\FinanceController::class, 'updateObjectifs'])->name('finance.objectifs.update');
     });
 });

@@ -8,229 +8,165 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .login-card {
             background: white;
-            border-radius: 16px;
-            padding: 35px 30px;
+            border-radius: 18px;
+            padding: 35px 32px;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border-top: 4px solid #ffd700;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
         }
 
         .login-card .logo {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
-        .login-card .logo i {
-            font-size: 2.5rem;
-            color: #ffd700;
-            background: #0d1f3c;
-            padding: 15px;
-            border-radius: 12px;
+        .login-card .logo .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: #dbeafe;
+            color: #3b82f6;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
         }
 
         .login-card .logo h4 {
             font-weight: 700;
-            color: #0d1f3c;
-            margin: 12px 0 4px;
-        }
-
-        .login-card .logo h4 span {
-            color: #ffd700;
+            color: #1e293b;
+            margin: 0;
         }
 
         .login-card .logo p {
-            color: #6c757d;
+            color: #64748b;
             font-size: 0.85rem;
-            margin: 0;
+            margin: 2px 0 0;
         }
 
         .login-card .form-label {
             font-weight: 600;
-            color: #0d1f3c;
+            color: #1e293b;
             font-size: 0.85rem;
         }
 
-        .login-card .form-label i {
-            color: #ffd700;
-            margin-right: 6px;
-        }
-
-        .login-card .form-control {
-            border-radius: 10px;
-            border: 2px solid #e0e7f0;
-            padding: 10px 14px;
-            transition: all 0.2s ease;
-        }
-
-        .login-card .form-control:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
-        }
-
-        .login-card .input-group .input-group-text {
-            background: #f8f9fa;
-            border: 2px solid #e0e7f0;
+        .login-card .input-group-text {
+            background: #f4f7fe;
+            border: 1.5px solid #e2e8f0;
             border-right: none;
             border-radius: 10px 0 0 10px;
-            color: #ffd700;
+            color: #3b82f6;
         }
 
         .login-card .input-group .form-control {
-            border-radius: 0 10px 10px 0;
+            border: 1.5px solid #e2e8f0;
             border-left: none;
+            border-radius: 0 10px 10px 0;
+            padding: 11px;
         }
 
         .login-card .input-group .form-control:focus {
-            border-color: #ffd700;
+            box-shadow: none;
+            border-color: #3b82f6;
         }
 
         .login-card .input-group:focus-within .input-group-text {
-            border-color: #ffd700;
-            background: #fffdf5;
-        }
-
-        .login-card .btn-login {
-            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-weight: 700;
-            width: 100%;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .login-card .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(13, 31, 60, 0.3);
-        }
-
-        .login-card .btn-login i {
-            color: #ffd700;
-        }
-
-        .login-card .alert {
-            border-radius: 10px;
-            font-size: 0.9rem;
-            border: none;
-            padding: 12px 16px;
-        }
-
-        .login-card .alert-danger {
-            background: #fef2f2;
-            color: #dc2626;
-            border-left: 4px solid #dc2626;
-        }
-
-        .login-card .alert-danger i {
-            margin-right: 8px;
-        }
-
-        .login-card .footer-link {
-            text-align: center;
-            margin-top: 18px;
-            padding-top: 15px;
-            border-top: 2px solid #f0f2f6;
-        }
-
-        .login-card .footer-link a {
-            color: #6c757d;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s ease;
-        }
-
-        .login-card .footer-link a i {
-            color: #ffd700;
-            margin-right: 4px;
-        }
-
-        .login-card .footer-link a:hover {
-            color: #0d1f3c;
+            border-color: #3b82f6;
         }
 
         .login-card .toggle-password {
-            background: none;
+            background: #f4f7fe;
+            border: 1.5px solid #e2e8f0;
+            border-left: none;
+            color: #94a3b8;
+            border-radius: 0 10px 10px 0;
+            padding: 0 14px;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
             border: none;
-            color: #adb5bd;
-            cursor: pointer;
-            padding: 0 12px;
+            border-radius: 10px;
+            padding: 13px;
+            font-weight: 600;
+            color: #fff;
+            width: 100%;
+            transition: all 0.2s;
         }
 
-        .login-card .toggle-password:hover {
-            color: #0d1f3c;
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            color: #fff;
         }
 
-        @media (max-width: 576px) {
-            .login-card {
-                padding: 25px 20px;
-            }
-
-            .login-card .logo i {
-                font-size: 2rem;
-                padding: 12px;
-            }
-
-            .login-card .logo h4 {
-                font-size: 1.3rem;
-            }
+        .alert-danger {
+            border-radius: 10px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            font-size: 0.85rem;
+            border-left: 4px solid #dc2626;
         }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #eef2f7;
+        }
+
+        .footer-link a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .footer-link a:hover { color: #3b82f6; }
     </style>
 </head>
 <body>
 
     <div class="login-card">
-        <!-- Logo -->
         <div class="logo">
-            <i class="fas fa-cubes"></i>
-            <h4>FDK <span>ERP</span></h4>
+            <div class="icon-circle"><i class="fas fa-cubes"></i></div>
+            <h4>FDK ERP</h4>
             <p>Espace Prospecteur</p>
         </div>
 
-        <!-- Errors -->
         @if ($errors->any())
             <div class="alert alert-danger">
-                <i class="fas fa-exclamation-circle"></i>
-                {{ $errors->first() }}
+                <i class="fas fa-exclamation-circle me-1"></i> {{ $errors->first() }}
             </div>
         @endif
 
-        <!-- Form -->
         <form method="POST" action="{{ route('login.attempt') }}">
             @csrf
 
             <div class="mb-3">
-                <label class="form-label">
-                    <i class="fas fa-envelope"></i> Email
-                </label>
+                <label class="form-label">Email</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                     <input type="email" name="email" class="form-control" placeholder="votre@email.com" required autofocus>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">
-                    <i class="fas fa-lock"></i> Mot de passe
-                </label>
+            <div class="mb-4">
+                <label class="form-label">Mot de passe</label>
                 <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
                     <button type="button" class="toggle-password" id="togglePassword">
                         <i class="fas fa-eye"></i>
@@ -239,31 +175,25 @@
             </div>
 
             <button type="submit" class="btn-login">
-                <i class="fas fa-sign-in-alt"></i> Se connecter
+                <i class="fas fa-sign-in-alt me-2"></i> Se connecter
             </button>
         </form>
 
-        <!-- Footer -->
         <div class="footer-link">
-            <a href="{{ route('admin.login') }}">
-                <i class="fas fa-user-shield"></i> Accès Admin
-            </a>
+            <a href="{{ route('admin.login') }}"><i class="fas fa-user-shield me-1"></i> Accès Admin</a>
         </div>
     </div>
 
     <script>
         document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
+            const input = document.getElementById('password');
             const icon = this.querySelector('i');
-
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
             } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         });
     </script>

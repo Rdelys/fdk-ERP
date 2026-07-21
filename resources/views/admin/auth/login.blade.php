@@ -8,191 +8,140 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #0d1f3c 0%, #1a3a6a 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .card {
             border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            background: white;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            background: #fff;
             width: 100%;
             max-width: 400px;
+            overflow: hidden;
         }
 
         .card-header {
-            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
-            color: white;
-            border-radius: 16px 16px 0 0 !important;
-            padding: 25px 30px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #fff;
+            padding: 32px 30px;
             border: none;
             text-align: center;
+        }
+
+        .card-header .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            font-size: 1.5rem;
         }
 
         .card-header h4 {
             margin: 0;
             font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .card-header h4 i {
-            color: #ffd700;
-            margin-right: 8px;
+            font-size: 1.4rem;
         }
 
         .card-header small {
             display: block;
-            color: #ffd700;
-            font-weight: 300;
-            letter-spacing: 3px;
-            font-size: 0.75rem;
-            margin-top: 4px;
+            color: #bfdbfe;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-size: 0.72rem;
+            margin-top: 6px;
+            text-transform: uppercase;
         }
 
-        .card-header small i {
-            margin-right: 4px;
-        }
+        .card-body { padding: 32px 30px; }
 
-        .card-body {
-            padding: 30px;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: #1a3a6a;
-            font-size: 0.9rem;
-        }
-
-        .form-label i {
-            color: #ffd700;
-            margin-right: 6px;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #e0e7f0;
-            padding: 12px 16px;
-            transition: all 0.2s;
-        }
-
-        .form-control:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0d1f3c, #1a3a6a);
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-weight: 600;
-            transition: all 0.2s;
-            width: 100%;
-        }
-
-        .btn-primary i {
-            margin-right: 8px;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #1a3a6a, #0d1f3c);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(13, 31, 60, 0.3);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .alert {
-            border-radius: 10px;
-            font-size: 0.9rem;
-            border: none;
-        }
-
-        .alert-danger {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
-        .alert i {
-            margin-right: 8px;
-        }
+        .form-label { font-weight: 600; color: #1e293b; font-size: 0.85rem; }
 
         .input-group-text {
-            background: #f8f9fa;
-            border: 2px solid #e0e7f0;
+            background: #f4f7fe;
+            border: 1.5px solid #e2e8f0;
             border-right: none;
             border-radius: 10px 0 0 10px;
-            color: #1a3a6a;
-        }
-
-        .input-group-text i {
-            color: #ffd700;
+            color: #3b82f6;
         }
 
         .input-group .form-control {
-            border-radius: 0 10px 10px 0;
+            border: 1.5px solid #e2e8f0;
             border-left: none;
+            border-radius: 0 10px 10px 0;
+            padding: 12px;
         }
 
         .input-group .form-control:focus {
-            border-color: #ffd700;
+            box-shadow: none;
+            border-color: #3b82f6;
         }
 
         .input-group:focus-within .input-group-text {
-            border-color: #ffd700;
-            background: #fff8e1;
+            border-color: #3b82f6;
         }
 
-        /* Responsive */
-        @media (max-width: 576px) {
-            .card-body {
-                padding: 20px;
-            }
-            
-            .card-header {
-                padding: 20px;
-            }
-            
-            .card-header h4 {
-                font-size: 1.3rem;
-            }
+        .btn-login {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border: none;
+            border-radius: 10px;
+            padding: 13px;
+            font-weight: 600;
+            color: #fff;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            color: #fff;
+        }
+
+        .alert-danger {
+            border-radius: 10px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="card-header">
-            <h4><i class="fas fa-lock"></i> Accès Admin</h4>
-            <small><i class="fas fa-cog"></i> FDK ERP</small>
+            <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
+            <h4>Accès Admin</h4>
+            <small>FDK ERP</small>
         </div>
         <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-circle"></i>
-                    {{ $errors->first() }}
+                    <i class="fas fa-exclamation-circle"></i> {{ $errors->first() }}
                 </div>
             @endif
 
             <form method="POST" action="{{ route('admin.login.attempt') }}">
                 @csrf
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fas fa-key"></i> Code d'accès
-                    </label>
+                <div class="mb-4">
+                    <label class="form-label">Code d'accès</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" name="code" class="form-control" placeholder="Entrez votre code" required autofocus>
+                        <input type="password" name="code" class="form-control" placeholder="••••" required autofocus>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
                 </button>
             </form>
         </div>
